@@ -1,0 +1,28 @@
+[
+   
+    {
+        "id": 1,
+        "title":"Sakiz",
+        "price":0.5,
+        "photo":"https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07120409/07120409-80c1fc-1650x1650.jpg"
+    },
+    {
+        "id": 2,
+        "title":"Kola",
+        "price":6,
+        "photo":"https://i.ya-webdesign.com/images/drink-coca-cola-png.png"
+    },
+    {
+        "id": 3,
+        "title":"Ayakkabi",
+        "price":400,
+        "photo":"https://www.asilkundura.com.tr/images/urunler/Deka-Spor---Klasik-Erkek-Ayakkabi---7703-resim2-256.jpg"
+    },
+    {
+        "id": 4,
+        "title":"Araba",
+        "price":40000,
+        "photo":"https://avatars.mds.yandex.net/i?id=6750eb0bea4b0b9627380e8990dc8062-4589529-images-thumbs&n=13"
+    }
+  
+]
