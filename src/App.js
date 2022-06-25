@@ -1,42 +1,40 @@
-import Header from './Components/Header'
+import Header from './components/Header';
+import { useState ,useEffect} from 'react';
 import './App.css';
-import {useState} from 'react'
-import { useEffect } from 'react';
-import products from "./product.json"
-import Product from "./Components/Product"
-import MainContext from './Maincontext';
+import plist from './products.json'
+import Product from './components/Product';
+import BasketP from './components/Basket';
+
 function App() {
 
-   const [money,setMoney] = useState(100)
-   const [basket,setBasket] =useState([])
-   const [total,setTotal] = useState(0)
+  const [money,setMoney] = useState(1000000)
+  const [basket,setBasket] = useState([])
+  const [total,setTotal] = useState(0)
+  const resetBasket= () => {
+    return setBasket([])
+  }
 
-   useEffect(() => {
-     
-   const t=  basket.reduce((acc,item) => {
-      return acc + (item.amount*(products.find(pro => pro.id === item.id).price))
-    },0)
-   }, [basket])
-
-   const data ={
-     basket ,setBasket, money, setMoney,setTotal,total
-   }
-
-  return (
-
-    <MainContext.Provider value={data}>
-  
-
-  
-  <Header money={money}>
+  useEffect(() => {
+    
+   setTotal(basket.reduce((acc,item) => {
+    
+    return acc+(item.amount * (plist.find(p=>p.id=== item.id).price))
+   },0
+  ))
    
-  </Header>
-  {products.map( p => (<Product  product={p}/>))}
-  
- 
+  }, [basket])
+  return (
+   <>
+   <Header  total={total} money={money} setMoney={setMoney}/>
+<div className="container products">{plist.map(p => (< Product total={total} money={money} setBasket={setBasket} basket={basket} product={p}/>))}</div>
+   
+   <button onClick={resetBasket}>Sepeti Sifirla </button>
+   <BasketP total={total} basket={basket} products={plist}/>
 
-  </MainContext.Provider>
-  );
+   
+   
+   </>
+  )
 }
 
 export default App;

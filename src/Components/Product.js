@@ -1,64 +1,70 @@
 import React from 'react'
-import MainContext from '../Maincontext'
-import { useContext } from 'react'
-export default function Product({ product }) {
 
-    const { basket, setBasket } = useContext(MainContext)
-    const basketItem = basket.find(item => item.id === product.id)
-
-    const addAmount = () => {
+export default function product({ money,total,product, basket, setBasket }) {
 
 
-        const checkBasket = basket.find(item => item.id === product.id)
-        if (checkBasket) {
-            checkBasket.amount += 1
-            setBasket([...basket.filter(item => item.id !== product.id), checkBasket])
-        }
-        else {
-            setBasket([...basket, { id: product.id, amount: 1 }])
-        }
+    const removeBasket= () =>{
+        const checkBasket = basket.find(i => i.id === product.id)
+        
+checkBasket.amount -=1
+if (checkBasket.amount===0){
+    setBasket([...basket.filter(i => i.id !== product.id)])
+}
+else{
+setBasket([...basket.filter(i => i.id !== product.id),checkBasket])
+}  
+        
+
 
     }
+    const basketItem = basket.find(item => item.id === product.id)
 
-    const removeBasket = () => {
-        const currentBasket = basket.find(item => item.id === product.id)
-
-       const basketWithOutCurrent = basket.filter(item => item.id !== product.id)
-            
-
-            
-        if(currentBasket.amount ===0 || currentBasket.amount ===null || currentBasket.amount === undefined) {
-            
-            setBasket([...basketWithOutCurrent])
+    const addBasket = () => {
+        const checkBasket = basket.find(i => i.id === product.id)
+        if (checkBasket) {
+checkBasket.amount +=1
+setBasket([...basket.filter(i => i.id !== product.id),checkBasket])
         }
-
-       else
-        {
-            currentBasket.amount -= 1
-            setBasket([...basket.filter(item => item.id !== product.id), currentBasket])
+        else {
+            setBasket([...basket, {
+                id: product.id,
+                amount: 1
+            }])
         }
 
     }
     return (
-        <div>
+        <>
 
             <div className="product">
+                <img src={product.photo} alt={product.title} />
                 <h6>
-                    {product.title}
-
+                    {
+                        product.title
+                    }
                 </h6>
-                <div className="price">
-                    {product.price}
-                </div>
+                <div className="price"><b> {product.price}$</b></div>
                 <div className="actions">
                     <button disabled={!basketItem} onClick={removeBasket}>Sat</button>
-                    <span className="amount"> {basketItem && basketItem.amount || 0} </span>
-                    <button onClick={addAmount}>Satin Al</button>
+                    <span>{basketItem && basketItem.amount || 0}</span>
+                    <button disabled={total +product.price> money} onClick={addBasket}>Satin Al</button>
                 </div>
 
+
+
+
+                <style jsx>{`
+                .product{
+                    padding: 10px ;
+                    background: #fff;
+                    border: 1px solid #ddd;
+                    margin-bottom: 20px;
+        `}
+
+
+                </style>
             </div>
-            <style jsx>{`.product{ padding:10px; background:#fff; border:1px solid #ddd; margin-bottom:20px;}`
-            } </style>
-        </div>
+        </>
+
     )
 }
