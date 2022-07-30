@@ -1,9 +1,9 @@
-import Header from './components/Header';
+import Header from './Components/Header';
 import { useState ,useEffect} from 'react';
 import './App.css';
 import plist from './products.json'
-import Product from './components/Product';
-import BasketP from './components/Basket';
+import Product from './Components/Product'; 
+import BasketP from "./Components/Basket"
 
 function App() {
 
